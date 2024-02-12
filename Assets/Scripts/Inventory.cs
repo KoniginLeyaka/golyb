@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
         currentItem = 0;
         for (int i = 0; i < startItems.Count; i++)
         {
-            AddItem(startItems[i]);
+            AddItem(startItems[i], ref inventoryItems);
         }
     }
 
@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
-            AddItem(item);
+            AddItem(item, ref inventoryItems);
         }
     }
     void Redraw()
@@ -62,9 +62,9 @@ public class Inventory : MonoBehaviour
             playerHotbarArray[i].GetComponent<RawImage>().texture = iconTexture;
         }
     }
-    public void AddItem(Item item) {
-        if (inventoryItems.Count < maxItems) {
-            inventoryItems.Add(item);
+    public void AddItem(Item item, ref List<Item> inventory) {
+        if (inventory.Count < maxItems) {
+            inventory.Add(item);
             Redraw();
         }
     }
